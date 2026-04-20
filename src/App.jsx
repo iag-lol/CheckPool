@@ -14,6 +14,9 @@ import Dashboard from './pages/Dashboard';
 
 export default function App() {
   const [boot, setBoot] = useState({ loading: true, error: null });
+  const routerBasename = import.meta.env.BASE_URL === '/'
+    ? undefined
+    : import.meta.env.BASE_URL.replace(/\/$/, '');
 
   useEffect(() => {
     let cancelled = false;
@@ -56,7 +59,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={routerBasename}>
       <Routes>
         <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/nueva-entrega" element={<Layout><NewDelivery /></Layout>} />
